@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card shadow-lg border-0">
+    <div class="card-body">
+        <h4 class="card-title text-center mb-4">Interview Results</h4>
+
+        <h5>Your Transcription:</h5>
+        <p>{{ transcription or "No transcription available." }}</p>
+
+        <h5>Scores:</h5>
+        <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item">Confidence Score: 
+                <strong>{{ confidence_score or "N/A" }}</strong>
+            </li>
+            <li class="list-group-item">NLP Score: 
+                {% if nlp_score > 0 %}
+                    <strong>{{ nlp_score }}</strong>
+                {% else %}
+                    Not applicable (no valid speech detected).
+                {% endif %}
+            </li>
+            <li class="list-group-item">Final Score: 
+                <strong>{{ final_score or "N/A" }}</strong>
+            </li>
+        </ul>
+
+        <h5>Status:</h5>
+        <p class="lead"><strong>{{ status or "No status available." }}</strong></p>
+
+        <a href="{{ url_for('home') }}" class="btn btn-primary btn-block mt-3">
+            <i class="fas fa-home mr-2"></i> Back to Home
+        </a>
+    </div>
+</div>
+{% endblock %}
