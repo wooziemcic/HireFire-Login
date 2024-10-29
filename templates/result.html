@@ -13,7 +13,7 @@
                 <strong>{{ confidence_score or "N/A" }}</strong>
             </li>
             <li class="list-group-item">NLP Score: 
-                {% if nlp_score > 0 %}
+                {% if transcription and nlp_score >= 0 %}
                     <strong>{{ nlp_score }}</strong>
                 {% else %}
                     Not applicable (no valid speech detected).
