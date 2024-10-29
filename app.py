@@ -41,7 +41,11 @@ nlp = spacy.load('en_core_web_sm')
 db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'login_github'
+login_manager.login_view = 'login'
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
 # Initialize the FLAN-T5 model and speech recognizer
 generator = pipeline('text2text-generation', model='google/flan-t5-large')
@@ -392,12 +396,13 @@ def transcribe_from_video(video_data):
         print(f"Error during transcription: {traceback.format_exc()}")
         return ""  # Return empty string on any other errors
 
+
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     session.clear()
-    return redirect(url_for('login_github'))
+    return redirect(url_for('login'))
 
 if __name__ == "__main__":
     app.run(debug=True)
