@@ -397,7 +397,7 @@ def transcribe_from_video(video_data):
 def logout():
     logout_user()
     session.clear()
-    return redirect(url_for('login'))
+    return redirect(url_for('login_github'))
 
 if __name__ == "__main__":
     app.run(debug=True)
